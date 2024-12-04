@@ -2,7 +2,7 @@
     font-family: "SF Pro";
     src:url("/Library/Fonts/SF-Pro.ttf") format('truetype'),
         url("/Library/Fonts/SF-Pro.otf") format('opentype'),
-        url('/Library/Fonts/SF-Pro.woff') format('woff'),;
+        url('/Library/Fonts/SF-Pro.woff') format('woff');
 }
 
 
