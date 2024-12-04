@@ -11,6 +11,19 @@ let num2;
 let result;
 // let cleared = false;
 
+function updateDisplay(text) {
+    if (text.length > 8) {
+        viewportText.style.fontSize = '60px';
+        viewportText.innerText = text.substring(0, 8);
+    } else if (text === `:( \u00A0`) {
+        viewportText.style.fontSize = '36px';
+        viewportText.innerText = text;
+    } else {
+        viewportText.style.fontSize = '60px';
+        viewportText.innerText = text;
+    }
+}
+
 function numberChecker(number) {
     if (number=='try again.') return false
     else if (number || number === 0) return true
@@ -42,16 +55,16 @@ function operate() {
         case "÷":
             if (num2===0 || num2==='0') {
                 // if dividing by 0, reset calculator
-                allClear()
-                viewportText.textContent = "try again :("
-                return
+                allClear();
+                updateDisplay(`:( \u00A0`);
+                return;
             } else {
                 result = divide(num1, num2);
             }
             break;
     }
     console.log(`${num1} ${operator} ${num2} = ${result}`);
-    viewportText.textContent = result;
+    updateDisplay(result);
 }
 
 const clearButton = document.querySelector('button#clear')
@@ -70,7 +83,7 @@ numberButtons.forEach((number) => {
             } else {
                 num1 = num1 + number.value; 
             }
-            viewportText.textContent = num1;
+            updateDisplay(num1);
             operationText.textContent = num1;
         } else if (numberChecker(num1) && operator) {
             if (!numberChecker(num2)) {
@@ -78,7 +91,7 @@ numberButtons.forEach((number) => {
             } else {
                 num2 = num2 + number.value; 
             }
-            viewportText.textContent = num2;
+            updateDisplay(num2);
             operationText.textContent = `${num1}${operator}${num2}`;
         } 
         console.log(`${num1} ${operator} ${num2} = ${result}`);
@@ -117,11 +130,11 @@ const percentButton = document.querySelector('button#percent')
 percentButton.addEventListener('click', () => {
     if (numberChecker(num1) && numberChecker(num2)) {
         num2 = divide(num2, 100)
-        viewportText.textContent = num2;
+        updateDisplay(num2);
         operationText.textContent = `${num1}${operator}${num2}`;
     } else if (numberChecker(num1) && !numberChecker(num2)) {
         num1 = divide(num1, 100)
-        viewportText.textContent = num1;
+        updateDisplay(num1);
         if (operator) operationText.textContent = `${num1}${operator}`;
         else operationText.textContent = `${num1}`;
     }
@@ -131,28 +144,31 @@ const negativeButton = document.querySelector('button#negative')
 negativeButton.addEventListener('click', () => {
     if (numberChecker(num1) && numberChecker(num2)) {
         num2 = Number(num2) * -1
-        viewportText.textContent = num2;
+        updateDisplay(num2);
         operationText.textContent = `${num1}${operator}${num2}`;
     } else if (numberChecker(num1) && !numberChecker(num2)) {
         num1 = Number(num1) * -1
-        viewportText.textContent = num1;
+        updateDisplay(num1);
         if (operator) operationText.textContent = `${num1}${operator}`;
         else operationText.textContent = `${num1}`;
     }
 })
 
-// negativeButton.addEventListener('click', () => {
+// const decimalButton = document.querySelector('button#decimal')
+// decimalButton.addEventListener("click", () => {
 //     if (numberChecker(num1) && numberChecker(num2)) {
-//         num2 = -1 * num2
-//         viewportText.textContent = num2;
+//         num2 = Number(num2) * -1
+//         updateDisplay(num2);
 //         operationText.textContent = `${num1}${operator}${num2}`;
 //     } else if (numberChecker(num1) && !numberChecker(num2)) {
-//         num1 = -1 * num1
-//         viewportText.textContent = num1;
-//         if (operator) operationText.textContent = `${num1}${operator}${num2}`;
-//         else if (!operator) operationText.textContent = `${num1}`;
+//         num1 = Number(num1) * -1
+//         updateDisplay(num1);
+//         if (operator) operationText.textContent = `${num1}${operator}`;
+//         else operationText.textContent = `${num1}`;
+//     } else if (!numberChecker(num1) && !numberChecker(num2)) {
+//         num1 = "0."
 //     }
-// })
+// }) 
 
 function add(num1, num2) {
     return Number((Number(num1) + Number(num2)).toFixed(5))
