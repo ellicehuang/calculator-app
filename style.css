@@ -2,6 +2,9 @@
     font-family: "SF Pro";
     src:url("/Library/Fonts/SF-Pro.ttf") format('truetype'),
         url("/Library/Fonts/SF-Pro.otf") format('opentype'),
+        url("/Library/Fonts/SF-Pro.svg") format('svg'),
+        url("/Library/Fonts/SF-Pro.eot") format('embedded-opentype'),
+        url('/Library/Fonts/SF-Pro.woff2') format('woff2'),
         url('/Library/Fonts/SF-Pro.woff') format('woff');
 }
 
