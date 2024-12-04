@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "SF Pro";
+    src:url("/Library/Fonts/SF-Pro.ttf");
+}
+
+
+* {
+    font-family: "SF Pro", monospace;
+    font-weight: 200;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -5,8 +16,6 @@ body {
     height: 100vh;
     overflow: scroll;
     min-height: 95vh;
-    font-family: "Open sans", sans-serif;
-    font-weight: 200;
 }
 
 .container {
@@ -23,7 +32,7 @@ body {
 }
 
 .row {
-    width: 300px;
+    width: inherit;
     border-radius: 8px;
     display: flex;
     flex: 1;
@@ -38,7 +47,10 @@ button {
     margin: 3px;
     cursor: pointer;
     transition-duration: 0.4s;
-    font-weight: 100;
+    max-width: 70px;
+    min-width: 70px;
+    text-align: center;
+    padding: 0px;
 }
 
 button:hover {
@@ -78,6 +90,8 @@ button#zero {
     flex-basis: 50%;
     text-align: left;
     padding-left: 30px;
+    max-width: 148px;
+    min-width: 148px;
 }
 
 #decimal, #equals {
@@ -90,7 +104,7 @@ button#zero {
 
 .ops, .equals {
     background-color: orange;
-    font-size: 37px;
+    font-size: 36px;
 }
 
 .num {
