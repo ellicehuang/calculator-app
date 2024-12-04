@@ -3,8 +3,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
+    min-height: 95vh;
     font-family: "Open sans", sans-serif;
-    font-weight: 100;
+    font-weight: 200;
 }
 
 .container {
@@ -21,9 +23,8 @@ body {
 }
 
 .row {
-    width: inherit;
+    width: 300px;
     border-radius: 8px;
-    /* border: 1px gray solid; */
     display: flex;
     flex: 1;
     align-items: center;
@@ -33,7 +34,7 @@ body {
 button {
     font-size: 28px;
     border-radius: 50px;
-    border:none;
+    border: none;
     margin: 3px;
     cursor: pointer;
     transition-duration: 0.4s;
