@@ -11,18 +11,31 @@ let num2;
 let result;
 // let cleared = false;
 
-function updateDisplay(text) {
-    if (text.length > 8) {
-        viewportText.style.fontSize = '60px';
-        viewportText.innerText = text.substring(0, 8);
-    } else if (text === `:( \u00A0`) {
-        viewportText.style.fontSize = '36px';
-        viewportText.innerText = text;
-    } else {
-        viewportText.style.fontSize = '60px';
-        viewportText.innerText = text;
-    }
+function roundNumber(num) {
+    return num.toExponential(2);
 }
+
+function updateDisplay(text) {
+    if (String(text).length > 8) text = roundNumber(Number(text))
+    if (text === `:( \u00A0`) viewportText.style.fontSize = '36px';
+    viewportText.style.fontSize = '60px';
+    viewportText.innerText = text;
+}
+
+function updateOperation() {
+    let num1Copy = num1
+    let num2Copy = num2
+    if (String(num1Copy).length > 8) num1Copy = roundNumber(Number(num1Copy))
+    if (String(num2Copy).length > 8) num2Copy = roundNumber(Number(num2Copy))
+
+    if (numberChecker(num1) && !operator && !numberChecker(num2)) {
+        operationText.textContent = num1Copy
+    } else if (numberChecker(num1) && operator && !numberChecker(num2)) {
+        operationText.textContent = `${num1Copy}${operator}`
+    } else if (numberChecker(num1) && operator && numberChecker(num2)) {
+        operationText.textContent = `${num1Copy}${operator}${num2Copy}`;
+    }
+} 
 
 function numberChecker(number) {
     if (number=='try again.') return false
@@ -64,6 +77,8 @@ function operate() {
             break;
     }
     console.log(`${num1} ${operator} ${num2} = ${result}`);
+
+    // if (String(result).length > 8) result = roundNumber(Number(result))
     updateDisplay(result);
 }
 
@@ -79,12 +94,12 @@ numberButtons.forEach((number) => {
         // if num1 and oeprator exist -> assign num2
         if (!operator) {
             if (!numberChecker(num1)) {
-                num1 = number.value; 
+                if (number.value === '0') return;
+                else num1 = number.value; 
             } else {
                 num1 = num1 + number.value; 
             }
             updateDisplay(num1);
-            operationText.textContent = num1;
         } else if (numberChecker(num1) && operator) {
             if (!numberChecker(num2)) {
                 num2 = number.value; 
@@ -92,8 +107,8 @@ numberButtons.forEach((number) => {
                 num2 = num2 + number.value; 
             }
             updateDisplay(num2);
-            operationText.textContent = `${num1}${operator}${num2}`;
         } 
+        updateOperation();
         console.log(`${num1} ${operator} ${num2} = ${result}`);
     })
 })
@@ -112,7 +127,6 @@ opButtons.forEach(operation => {
             result = null;
             num2 = null;
             operator = operation.getAttribute('value');
-            operationText.textContent = `${num1}${operator}`;
         }
         else if (numberChecker(result)) {
             // reassign num1 as result if result exists and reset operation
@@ -120,8 +134,8 @@ opButtons.forEach(operation => {
             result = null;
             num2 = null;
             operator = operation.getAttribute('value');
-            operationText.textContent = `${num1}${operator}`;
         }
+        updateOperation();
         console.log(`${num1} ${operator} ${num2} = ${result}`);
     })
 });
@@ -131,13 +145,11 @@ percentButton.addEventListener('click', () => {
     if (numberChecker(num1) && numberChecker(num2)) {
         num2 = divide(num2, 100)
         updateDisplay(num2);
-        operationText.textContent = `${num1}${operator}${num2}`;
     } else if (numberChecker(num1) && !numberChecker(num2)) {
         num1 = divide(num1, 100)
         updateDisplay(num1);
-        if (operator) operationText.textContent = `${num1}${operator}`;
-        else operationText.textContent = `${num1}`;
     }
+    updateOperation();
 })
 
 const negativeButton = document.querySelector('button#negative')
@@ -145,13 +157,11 @@ negativeButton.addEventListener('click', () => {
     if (numberChecker(num1) && numberChecker(num2)) {
         num2 = Number(num2) * -1
         updateDisplay(num2);
-        operationText.textContent = `${num1}${operator}${num2}`;
     } else if (numberChecker(num1) && !numberChecker(num2)) {
         num1 = Number(num1) * -1
         updateDisplay(num1);
-        if (operator) operationText.textContent = `${num1}${operator}`;
-        else operationText.textContent = `${num1}`;
     }
+    updateOperation();
 })
 
 // const decimalButton = document.querySelector('button#decimal')
