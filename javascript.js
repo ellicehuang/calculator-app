@@ -168,32 +168,23 @@ const decimalButton = document.querySelector('button#decimal')
 decimalButton.addEventListener('click', () => {
         //  only allow if number does not already have a decimal
     if (!numberChecker(num1)) {
-        num1 = '0.'
+        num1 = '0.';
     } else if (numberChecker(num1) && !numberChecker(num2)) {
         if (String(num1).includes(".")) return;
-        else num1 = String(num1) + '.';
+        else {
+            num1 = String(num1) + '.';
+            updateDisplay(num1);
+        }
         console.log(`adding decimal to num1: ${num1}`)
     } else if (numberChecker(num1) && numberChecker(num2)) {
         if (String(num2).includes(".")) return;
-        else num2 = String(num2) + '.'
+        else {
+            num2 = String(num2) + '.';
+            updateDisplay(num2);
+        }
     }
+    updateOperation();
 })
-
-// const decimalButton = document.querySelector('button#decimal')
-// decimalButton.addEventListener("click", () => {
-//     if (numberChecker(num1) && numberChecker(num2)) {
-//         num2 = Number(num2) * -1
-//         updateDisplay(num2);
-//         operationText.textContent = `${num1}${operator}${num2}`;
-//     } else if (numberChecker(num1) && !numberChecker(num2)) {
-//         num1 = Number(num1) * -1
-//         updateDisplay(num1);
-//         if (operator) operationText.textContent = `${num1}${operator}`;
-//         else operationText.textContent = `${num1}`;
-//     } else if (!numberChecker(num1) && !numberChecker(num2)) {
-//         num1 = "0."
-//     }
-// }) 
 
 function add(num1, num2) {
     return Number((Number(num1) + Number(num2)).toFixed(5))
