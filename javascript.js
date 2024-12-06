@@ -164,6 +164,21 @@ negativeButton.addEventListener('click', () => {
     updateOperation();
 })
 
+const decimalButton = document.querySelector('button#decimal')
+decimalButton.addEventListener('click', () => {
+        //  only allow if number does not already have a decimal
+    if (!numberChecker(num1)) {
+        num1 = '0.'
+    } else if (numberChecker(num1) && !numberChecker(num2)) {
+        if (String(num1).includes(".")) return;
+        else num1 = String(num1) + '.';
+        console.log(`adding decimal to num1: ${num1}`)
+    } else if (numberChecker(num1) && numberChecker(num2)) {
+        if (String(num2).includes(".")) return;
+        else num2 = String(num2) + '.'
+    }
+})
+
 // const decimalButton = document.querySelector('button#decimal')
 // decimalButton.addEventListener("click", () => {
 //     if (numberChecker(num1) && numberChecker(num2)) {

@@ -85,7 +85,7 @@ button:hover {
     align-self:flex-end;
 }
 
-.ops, .num, .func, .equals {
+.ops, .num, .func, .equals, .decimal {
     flex: 1;
     align-self: stretch;
     color: white;
@@ -112,6 +112,6 @@ button#zero {
     font-size: 36px;
 }
 
-.num {
+.num, .decimal {
     background-color: slategray;
 }
