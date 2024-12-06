@@ -199,37 +199,6 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-        return Number((Number(num1) / Number(num2)).toFixed(5))
+    return Number((Number(num1) / Number(num2)).toFixed(5))
 }
 
-
-
-
-
-
-// function clear() {
-//     cleared = true;
-//     if (num1 && operator && num2) {
-//         num2 = null;
-//         viewportText.textContent = 0;
-//     } else if (num1 && operator && !num2) {
-//         operator = null;
-//     } else if (num1 && !operator && !num2) {
-//         num1 = null;
-//         viewportText.textContent = 0;
-//     }
-//     if (!num1 && !operator && !num2) cleared = false;
-//     console.log(`num1: ${num1}, num2: ${num2}, op: ${operator}, ${cleared}`)
-// }
-
-// const buttons = document.querySelectorAll('button') 
-// buttons.forEach(element => {
-//     element.addEventListener('click', () => {
-//         console.log(`${cleared}`)
-//         if (cleared || !num1 && !operator && !num2) {
-//             document.querySelector('button#clear').textContent = 'AC'
-//         } else if (!cleared) {
-//             document.querySelector('button#clear').textContent = 'C'
-//         }
-//     })
-// });
