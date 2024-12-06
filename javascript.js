@@ -102,6 +102,7 @@ numberButtons.forEach((number) => {
             updateDisplay(num1);
         } else if (numberChecker(num1) && operator) {
             if (!numberChecker(num2)) {
+                if (number.value === '0') return;
                 num2 = number.value; 
             } else {
                 num2 = num2 + number.value; 
