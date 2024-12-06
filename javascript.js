@@ -12,7 +12,10 @@ let result;
 // let cleared = false;
 
 function roundNumber(num) {
-    return num.toExponential(2);
+    if (String(num.toFixed(2)).length > 8) {
+        return num.toExponential(2);
+    }
+    else return num.toFixed(2)
 }
 
 function updateDisplay(text) {
@@ -78,7 +81,6 @@ function operate() {
     }
     console.log(`${num1} ${operator} ${num2} = ${result}`);
 
-    // if (String(result).length > 8) result = roundNumber(Number(result))
     updateDisplay(result);
 }
 
@@ -176,7 +178,6 @@ decimalButton.addEventListener('click', () => {
             num1 = String(num1) + '.';
             updateDisplay(num1);
         }
-        console.log(`adding decimal to num1: ${num1}`)
     } else if (operator && !numberChecker(num2)) {
         num2 = '0.';
     } else if (numberChecker(num1) && numberChecker(num2)) {
