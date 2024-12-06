@@ -79,9 +79,13 @@ function operate() {
             }
             break;
     }
-    console.log(`${num1} ${operator} ${num2} = ${result}`);
 
     updateDisplay(result);
+    num1 = null;
+    num2 = null;
+    operator = null;
+
+    console.log(`${num1} ${operator} ${num2} = ${result}`);
 }
 
 const clearButton = document.querySelector('button#clear')
@@ -98,6 +102,7 @@ numberButtons.forEach((number) => {
             if (!numberChecker(num1)) {
                 if (number.value === '0') return;
                 else num1 = number.value; 
+                if (result) result = null;
             } else {
                 num1 = num1 + number.value; 
             }
